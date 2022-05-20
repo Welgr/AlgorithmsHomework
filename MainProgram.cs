@@ -70,8 +70,10 @@ namespace AlgorithmsHomework
             switch (command)
             {
                 case "1":
-                    Console.Write("Работает");
                     Homework1.Homework1Main();
+                    break;
+                case "2":
+                    Homework2.Homework2Main();
                     break;
                 default:
                     Console.SetCursorPosition(0, 13);
@@ -91,7 +93,9 @@ namespace AlgorithmsHomework
             Console.SetCursorPosition((WINDOW_WIDTH - 1) / 2 - (nameSpace.Length / 2), 0);
             Console.Write(nameSpace);
             Console.SetCursorPosition(1, 1);
-            Console.Write("└──1");
+            Console.Write("├──1");
+            Console.SetCursorPosition(1, 2);
+            Console.Write("└──2");
         }
         public static void DrawWindow(int x, int y, int width, int height)
         {
