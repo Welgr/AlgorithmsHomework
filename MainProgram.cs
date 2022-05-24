@@ -75,6 +75,9 @@ namespace AlgorithmsHomework
                 case "2":
                     Homework2.Homework2Main();
                     break;
+                case "3":
+                    Homework3.Homework3Main();
+                    break;
                 default:
                     Console.SetCursorPosition(0, 13);
                     Console.Write("Введено неккоретное значение номера работы");
@@ -95,7 +98,9 @@ namespace AlgorithmsHomework
             Console.SetCursorPosition(1, 1);
             Console.Write("├──1");
             Console.SetCursorPosition(1, 2);
-            Console.Write("└──2");
+            Console.Write("├──2");
+            Console.SetCursorPosition(1, 3);
+            Console.Write("└──3");
         }
         public static void DrawWindow(int x, int y, int width, int height)
         {
