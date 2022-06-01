@@ -19,7 +19,6 @@ namespace AlgorithmsHomework
                 new Homework3(),
                 new Homework4()
             };
-            int check = homeworks.Count;
             DrawSpace(homeworks, WINDOW_WIDTH);
             UpdateConsole(homeworks);
             Console.ReadKey(true);
