@@ -12,20 +12,12 @@ namespace AlgorithmsHomework
         public Node NextItem { get; set; }
         public Node PrevItem { get; set; }
     }
-    public class Homework2
+    public class Homework2: IHomework
     {
-        public static void Homework2Main()
+        public string Name => "2";
+        public void Run()
         {
             Console.Clear();
-            Console.WriteLine("Работает");
-            //Node node1 = new Node { Value = 123, NextItem = null, PrevItem = null };
-            //Node node2 = new Node { Value = 456, NextItem = null, PrevItem = node1 };
-            //node1.NextItem = node2;
-            //node1 = new Node { Value = 789, NextItem = null, PrevItem = node2 };
-            //node2.NextItem = node1;
-            //node2 = new Node { Value = 0, NextItem = null, PrevItem = node1 };
-            //StringBuilder x = new StringBuilder();
-            //Node node3 = node1;
             Node node1 = new Node { Value = 101, NextItem = null, PrevItem = null };
             AddNode(node1, 123);
             AddNode(node1, 456);
@@ -39,6 +31,7 @@ namespace AlgorithmsHomework
             Console.WriteLine("Количество элементов после удаления 4го элемента: " + GetCount(testNode));
             AddNodeAfter(testNode, 987);
             Console.WriteLine("Количество элементов после добавления нового элемента: " + GetCount(testNode));
+            Program.ReturntoMainProgram(4);
         }
         
         static void AddNode(Node startNode, int value)

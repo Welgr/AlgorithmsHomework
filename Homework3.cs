@@ -17,9 +17,10 @@ namespace AlgorithmsHomework
         public double x;
         public double y;
     }
-    public class Homework3
+    public class Homework3 : IHomework
     {
-        public static void Homework3Main()
+        public string Name => "3";
+        public void Run()
         {
             Console.Clear();
             DrawSpace();
@@ -40,6 +41,7 @@ namespace AlgorithmsHomework
             Console.Write(intermediateClassTime / intermediateStructTime);
             Console.SetCursorPosition(64, 3);
             Console.Write(generalClassTime / generalStructTime);
+            Program.ReturntoMainProgram(5);
         }
         static double PointDistanceStruct(PointStructDouble pointOne, PointStructDouble pointTwo)
         {
@@ -111,9 +113,9 @@ namespace AlgorithmsHomework
             Program.DrawWindow(63, 0, 20, 5);
             WriteName(" Class/Struct ", 63, 0, 20);
         }
-        static void WriteName(string nameSpace, int x, int y, int width)
+        public static void WriteName(string nameSpace, int x, int y, int width)
         {
-            Console.SetCursorPosition(x + width / 2 - (nameSpace.Length / 2), 0);
+            Console.SetCursorPosition(x + width / 2 - (nameSpace.Length / 2), y);
             Console.Write(nameSpace);
         }
     }

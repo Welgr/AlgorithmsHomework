@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace AlgorithmsHomework
 {
-    public class Homework1
+    public class Homework1: IHomework
     {
-        public static void Homework1Main()
+        public string Name => "1";
+        public void Run()
         {
             Console.Clear();
             DrawSpace();
@@ -170,6 +171,8 @@ namespace AlgorithmsHomework
                     task3();
                     break;
                 case "":
+                    //var prog = new Program();
+                    //prog.Main();
                     Program.Main();
                     break;
                 default:

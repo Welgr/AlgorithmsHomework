@@ -1,30 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace AlgorithmsHomework
 {
+    
     internal class Program
     {
-        public const int WINDOW_HEIGHT = 30;
+
         public const int WINDOW_WIDTH = 120;
         public static void Main()
         {
             Console.Clear();
-            DrawSpace();
-            UpdateConsole();
+            List<IHomework> homeworks = new List<IHomework>()
+            {
+                new Homework1(),
+                new Homework2(),
+                new Homework3(),
+                new Homework4()
+            };
+            DrawSpace(homeworks, WINDOW_WIDTH);
+            UpdateConsole(homeworks);
             Console.ReadKey(true);
         }
-
-        static void UpdateConsole()
+        static void UpdateConsole(List<IHomework> homeworks)
         {
-            DrawWindow(0, 10, WINDOW_WIDTH - 1, 3);
-            string nameSpace = " Введине номер задания ";
-            Console.SetCursorPosition((WINDOW_WIDTH - 1) / 2 - (nameSpace.Length / 2), 10);
-            Console.Write(nameSpace);
-            Console.SetCursorPosition(1, 11);
-            CommandEnter(WINDOW_WIDTH - 1);
+            Program.DrawWindow(0, homeworks.Count + 2, WINDOW_WIDTH - 1, 3);
+            Homework3.WriteName(" Введите номер задания ", 0, homeworks.Count + 2, WINDOW_WIDTH - 1);
+            Console.SetCursorPosition(1, homeworks.Count + 3);
+            CommandEnterParse(WINDOW_WIDTH - 1, homeworks);
         }
-        static void CommandEnter(int width)
+        static void CommandEnterParse(int width, List<IHomework> homeworks)
         {
             (int left, int top) = GetCursorPosition();
             StringBuilder command = new StringBuilder();
@@ -61,46 +67,42 @@ namespace AlgorithmsHomework
                 }
             }
             while (key != (char)13);
-            CommandParse(command.ToString());
 
+            foreach (IHomework homework in homeworks)
+            {
+                if (homework.Name == command.ToString())
+                {
+                    homework.Run();
+                    return;
+                }
+                else if (homeworks[homeworks.Count - 1] == homework)
+                {
+                    Console.SetCursorPosition(0, homeworks.Count + 5);
+                    Console.Write("Введено неккоретное значение номера работы");
+                    UpdateConsole(homeworks);
+                }
+            }
+                
         }
 
-        static void CommandParse(string command)
+        static void DrawHomeworks(List<IHomework> homeworks, int y)
         {
-            switch (command)
+            for (int i = 0; i < homeworks.Count; i++, y++)
             {
-                case "1":
-                    Homework1.Homework1Main();
-                    break;
-                case "2":
-                    Homework2.Homework2Main();
-                    break;
-                case "3":
-                    Homework3.Homework3Main();
-                    break;
-                default:
-                    Console.SetCursorPosition(0, 13);
-                    Console.Write("Введено неккоретное значение номера работы");
-                    UpdateConsole();
-                    break;
+                Console.SetCursorPosition(1, y + 1);
+                if (i == homeworks.Count - 1)
+                {
+                    Console.Write($"└──{homeworks[homeworks.Count - 1].Name}");
+                    return;
+                }
+                Console.Write($"├──{homeworks[i].Name}");
             }
         }
-        public static (int left, int top) GetCursorPosition()
+        static void DrawSpace(List<IHomework> homeworks, int WINDOW_WIDTH)
         {
-            return (Console.CursorLeft, Console.CursorTop);
-        }
-        static void DrawSpace()
-        {
-            DrawWindow(0, 0, WINDOW_WIDTH - 1, 10);
-            string nameSpace = " Доступные работы ";
-            Console.SetCursorPosition((WINDOW_WIDTH - 1) / 2 - (nameSpace.Length / 2), 0);
-            Console.Write(nameSpace);
-            Console.SetCursorPosition(1, 1);
-            Console.Write("├──1");
-            Console.SetCursorPosition(1, 2);
-            Console.Write("├──2");
-            Console.SetCursorPosition(1, 3);
-            Console.Write("└──3");
+            DrawWindow(0, 0, WINDOW_WIDTH - 1, homeworks.Count + 2);
+            Homework3.WriteName(" Доступные работы ", 0, 0, WINDOW_WIDTH - 1);
+            DrawHomeworks(homeworks, 0);
         }
         public static void DrawWindow(int x, int y, int width, int height)
         {
@@ -130,5 +132,19 @@ namespace AlgorithmsHomework
             Console.WriteLine("╝");
             Console.SetCursorPosition(x, y);
         }
+        public static void ReturntoMainProgram(int y)
+        {
+            string returnPhrase = "Нажмите любую клавишу для возврата к стартовому меню";
+            Console.SetCursorPosition((WINDOW_WIDTH - 1 )/ 2 - returnPhrase.Length / 2 , y);
+            Console.Write(returnPhrase);
+            Console.ReadKey(true);
+            Main();
+        }
+
+        public static (int left, int top) GetCursorPosition()
+        {
+            return (Console.CursorLeft, Console.CursorTop);
+        }
+       
     }
 }
