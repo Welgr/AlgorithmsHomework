@@ -17,7 +17,8 @@ namespace AlgorithmsHomework
                 new Homework1(),
                 new Homework2(),
                 new Homework3(),
-                new Homework4()
+                new Homework4(),
+                new Homework5()
             };
             DrawSpace(homeworks, WINDOW_WIDTH);
             UpdateConsole(homeworks);
